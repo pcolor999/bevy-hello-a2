@@ -7,8 +7,10 @@ edition = "2024"
 bevy = "0.18.1"
 
 [profile.dev]
-opt-level = 1
-debug = false # <--- This is the magic line that fixes the 1GB file size
+opt-level = 'z'      # 'z' tells Rust to aggressively optimize for small file size
+debug = false        # No debug info
+strip = true         # Strip all remaining symbols (this saves a massive amount of space)
 
 [profile.dev.package."*"]
-opt-level = 3
+opt-level = 'z'      # Optimize all of Bevy's internal code for small size too
+strip = true
